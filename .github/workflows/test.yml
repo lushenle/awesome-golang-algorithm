@@ -27,7 +27,9 @@ jobs:
       uses: golangci/golangci-lint-action@v2
 
     - name: Test
-      run: make cover_test
+      run: |
+        go test -v ./... -covermode=count -coverprofile=coverage.out
+        go tool cover -func=coverage.out -o=coverage.out
 
     - name: Go Coverage Badge
       uses: tj-actions/coverage-badge-go@v1
@@ -41,8 +43,8 @@ jobs:
         files: README.md
 
     - name: Push changes
-      if: steps.changed_files.outputs.files_changed == 'true'
+      if: steps.verify-changed-files.outputs.files_changed == 'true'
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ github.token }}
+        github_token: ${{ github.GITHUB_TOKEN }}
         branch: ${{ github.head_ref }}
