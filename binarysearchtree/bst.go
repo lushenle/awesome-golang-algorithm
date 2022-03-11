@@ -3,10 +3,12 @@ package binarysearchtree
 import (
 	"fmt"
 	"sync"
+
+	"github.com/lushenle/awesome-golang-algorithm/generic"
 )
 
 // Item the type of the binary search tree
-type Item interface{}
+type Item generic.Type
 
 // Node a single node that composes the tree
 type Node struct {

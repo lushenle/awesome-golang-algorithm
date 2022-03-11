@@ -1,45 +1,57 @@
 package queue
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
-func TestQueue(t *testing.T) {
-	q := New()
+var q ItemQueue
 
-	if q.Len() != 0 {
-		t.Errorf("error: length should be 0")
+func initQueue() *ItemQueue {
+	if q.items == nil {
+		q = ItemQueue{}
+		q.New()
 	}
 
-	q.Enqueue(1)
-	if q.Len() != 1 {
-		t.Errorf("error: length should be 1")
-	}
+	return &q
+}
 
-	if q.Peek().(int) != 1 {
-		t.Errorf("error: enqueue value should be 1")
-	}
-
-	v := q.Dequeue()
-	if v.(int) != 1 {
-		t.Errorf("error: dequeued value should be 1")
-	}
-
-	if q.Peek() != nil || q.Dequeue() != nil {
-		t.Errorf("empty queue should have no values")
-	}
-
+func TestItemQueue_Enqueue(t *testing.T) {
+	q := initQueue()
 	q.Enqueue(1)
 	q.Enqueue(2)
+	q.Enqueue(3)
 
-	if q.Len() != 2 {
-		t.Errorf("error: length should be 0")
+	if length := q.Len(); length != 3 {
+		t.Errorf("wrong count, expected 3 and got %d", length)
 	}
+}
 
-	if q.Peek().(int) != 1 {
-		t.Errorf("error: first value should be 1")
+func TestItemQueue_Peek(t *testing.T) {
+	if item := q.Peek(); reflect.DeepEqual(item, 3) {
+		t.Errorf("Peek() = %v, want %v", item, 3)
+	}
+}
+
+func TestItemQueue_Dequeue(t *testing.T) {
+	q.Enqueue(1)
+	q.Enqueue(1)
+	q.Dequeue()
+
+	if length := len(q.items); length != 4 {
+		t.Errorf("wrong count, expected 2 and got %d", length)
 	}
 
 	q.Dequeue()
-	if q.Peek().(int) != 2 {
-		t.Errorf("error: next value should be 2")
+	q.Dequeue()
+
+	if length := q.Len(); length != 2 {
+		t.Errorf("wrong count, expected 0 and got %d", length)
+	}
+	q.Dequeue()
+	q.Dequeue()
+
+	if !q.IsEmpty() {
+		t.Error("IsEmpty should return true")
 	}
 }

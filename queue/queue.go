@@ -1,64 +1,56 @@
 package queue
 
-// node storage of queue data
-type node struct {
-	value interface{}
-	next  *node
+import (
+	"sync"
+
+	"github.com/lushenle/awesome-golang-algorithm/generic"
+)
+
+// Item the type of the queue
+type Item generic.Type
+
+// ItemQueue the queue of Items
+type ItemQueue struct {
+	items []Item
+	lock  sync.RWMutex
 }
 
-// Queue storage of the queue, a double linked list
-type Queue struct {
-	start  *node
-	end    *node
-	length int
+// New create a new ItemQueue
+func (q *ItemQueue) New() *ItemQueue {
+	q.items = []Item{}
+	return q
 }
 
-// New creates a new queue
-func New() *Queue {
-	return &Queue{nil, nil, 0}
+// Enqueue add an Item to the end of the queue
+func (q *ItemQueue) Enqueue(it Item) {
+	q.lock.Lock()
+	q.items = append(q.items, it)
+	q.lock.Unlock()
 }
 
-// Dequeue take the next item off the front of the queue
-func (q *Queue) Dequeue() interface{} {
-	if q.length == 0 {
-		return nil
-	}
-
-	n := q.start
-	if q.length == 1 {
-		q.start = nil
-		q.end = nil
-	} else {
-		q.start = q.start.next
-	}
-	q.length--
-
-	return n.value
+// Dequeue remove an Item from the start of the queue
+func (q *ItemQueue) Dequeue() *Item {
+	q.lock.Lock()
+	item := q.items[0]
+	q.items = q.items[1:len(q.items)]
+	q.lock.Unlock()
+	return &item
 }
 
-// Enqueue put an item on the end of a queue
-func (q *Queue) Enqueue(value interface{}) {
-	n := &node{value: value, next: nil}
-
-	if q.length == 0 {
-		q.start = n
-		q.end = n
-	}
-	q.end.next = n
-	q.end = n
-	q.length++
+// Peek return the item next in the queue, without removing it
+func (q *ItemQueue) Peek() *Item {
+	q.lock.Lock()
+	item := q.items[0]
+	q.lock.Unlock()
+	return &item
 }
 
-// Len return the number of items in the queue
-func (q *Queue) Len() int {
-	return q.length
+// IsEmpty return true if the queue is empty
+func (q *ItemQueue) IsEmpty() bool {
+	return len(q.items) == 0
 }
 
-// Peek return the fist item in the queue without removing it
-func (q *Queue) Peek() interface{} {
-	if q.length == 0 {
-		return nil
-	}
-
-	return q.start.value
+// Len return the number of Items in the queue
+func (q *ItemQueue) Len() int {
+	return len(q.items)
 }
