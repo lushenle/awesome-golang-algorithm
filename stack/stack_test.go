@@ -1,48 +1,53 @@
 package stack
 
 import (
+	"reflect"
 	"testing"
 )
 
-func TestStack(t *testing.T) {
-	s := New()
+var s ItemStack
 
-	if s.Len() != 0 {
-		t.Errorf("error: length should be 0")
+func initStack() *ItemStack {
+	if s.items == nil {
+		s = ItemStack{}
+		s.New()
 	}
 
+	return &s
+}
+
+func TestItemStack_Push(t *testing.T) {
+	s := initStack()
 	s.Push(1)
-	if s.Len() != 1 {
-		t.Errorf("error: length should be 1")
-	}
-
-	if s.Peek().(int) != 1 {
-		t.Errorf("error: top value should be 1")
-	}
-
-	if s.Pop().(int) != 1 {
-		t.Errorf("error: top value should be 1")
-	}
-
 	s.Push(2)
+	s.Push(3)
 
-	if s.Len() != 2 {
-		t.Errorf("error: length should be 2")
+	if length := len(s.items); length != 3 {
+		t.Errorf("wrong count, expected 3 and got %d", length)
+	}
+}
+
+func TestItemStack_Peek(t *testing.T) {
+	if item := s.Peek(); reflect.DeepEqual(item, 3) {
+		t.Errorf("Peek() = %v, want %v", item, 3)
+	}
+}
+
+func TestItemStack_Len(t *testing.T) {
+	s.Pop()
+	if length := s.Len(); length != 2 {
+		t.Errorf("wrong count, expected 2 and got %d", length)
+	}
+}
+
+func TestItemStack_Pop(t *testing.T) {
+	s.Pop()
+	s.Pop()
+	if size := len(s.items); size != 0 {
+		t.Errorf("wrong count, expected 0 and got %d", size)
 	}
 
-	if s.Peek().(int) != 2 {
-		t.Errorf("error: top value should be 2")
-	}
-
-	if s.IsEmpty() {
-		t.Errorf("error: empty stack have no values")
-	}
-
-	if s.length == 0 {
-		t.Errorf("error:")
-	}
-
-	if s.Pop().(int) != 2 {
-		t.Errorf("error: top value should be 2")
+	if !s.IsEmpty() {
+		t.Error("IsEmpty should return true")
 	}
 }
