@@ -29,7 +29,7 @@ func Test_hash(t *testing.T) {
 	}
 }
 
-func populateHashtable(count int, start int) *HashTable {
+func populateHashtable(count, start int) *HashTable {
 	dict := HashTable{}
 	for i := start; i < start+count; i++ {
 		dict.Put(fmt.Sprintf("key%d", i), fmt.Sprintf("value%d", i))
