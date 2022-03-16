@@ -89,6 +89,11 @@ func TestMergeSort(t *testing.T) {
 	testFramework(t, MergeSort)
 }
 
+func TestQuickSort(t *testing.T) {
+	testFramework(t, QuickSort)
+}
+
+// Bench tests
 func benchmarkFramework(b *testing.B, f func(arr []int) []int) {
 	var sortTests = []struct {
 		input    []int
@@ -140,4 +145,8 @@ func BenchmarkInsertionSort(b *testing.B) {
 
 func BenchmarkMergeSort(b *testing.B) {
 	benchmarkFramework(b, MergeSort)
+}
+
+func BenchmarkQuickSort(b *testing.B) {
+	benchmarkFramework(b, QuickSort)
 }
