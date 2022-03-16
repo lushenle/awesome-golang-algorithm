@@ -80,3 +80,7 @@ func TestBubbleSort(t *testing.T) {
 func TestSelectionSort(t *testing.T) {
 	testFramework(t, SelectionSort)
 }
+
+func TestInsertionSort(t *testing.T) {
+	testFramework(t, InsertionSort)
+}
