@@ -76,3 +76,7 @@ func testFramework(t *testing.T, sortingFunction func([]int) []int) {
 func TestBubbleSort(t *testing.T) {
 	testFramework(t, BubbleSort)
 }
+
+func TestSelectionSort(t *testing.T) {
+	testFramework(t, SelectionSort)
+}
