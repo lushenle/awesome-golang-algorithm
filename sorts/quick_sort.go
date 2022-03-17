@@ -68,8 +68,15 @@ func quickSortRange(nums []int, low, high int) {
 	}
 
 	if low < high {
+		// find pivot element such that
+		// elements smaller than pivot are on the left
+		// elements greater than pivot are on the right
 		pivot := partition(nums, low, high)
+
+		// recursive call on the left of pivot
 		quickSortRange(nums, low, pivot-1)
+
+		// recursive call on the right of pivot
 		quickSortRange(nums, pivot+1, high)
 	}
 }
