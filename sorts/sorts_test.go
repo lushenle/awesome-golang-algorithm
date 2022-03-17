@@ -97,6 +97,10 @@ func TestCountSort(t *testing.T) {
 	testFramework(t, CountSort)
 }
 
+func TestRadixSort(t *testing.T) {
+	testFramework(t, RadixSort)
+}
+
 // Bench tests
 func benchmarkFramework(b *testing.B, f func(arr []int) []int) {
 	var sortTests = []struct {
@@ -157,4 +161,8 @@ func BenchmarkQuickSort(b *testing.B) {
 
 func BenchmarkCountSort(b *testing.B) {
 	benchmarkFramework(b, CountSort)
+}
+
+func BenchmarkRadixSort(b *testing.B) {
+	benchmarkFramework(b, RadixSort)
 }
