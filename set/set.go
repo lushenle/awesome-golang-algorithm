@@ -58,3 +58,7 @@ func (s *ItemSet) Items() []Item {
 func (s *ItemSet) Size() int {
 	return len(s.items)
 }
+
+// IsSubset tests whether t is a subset of s
+// TODO: IsSubset
+//func (s *ItemSet) IsSubset(item1, item []Item) bool {}
