@@ -109,6 +109,10 @@ func TestCombSort(t *testing.T) {
 	testFramework(t, CombSort)
 }
 
+func TestShellSort(t *testing.T) {
+	testFramework(t, ShellSort)
+}
+
 // Bench tests
 func benchmarkFramework(b *testing.B, f func(arr []int) []int) {
 	var sortTests = []struct {
@@ -181,4 +185,8 @@ func BenchmarkHeapSort(b *testing.B) {
 
 func BenchmarkCombSort(b *testing.B) {
 	benchmarkFramework(b, CombSort)
+}
+
+func BenchmarkShellSort(b *testing.B) {
+	benchmarkFramework(b, ShellSort)
 }
