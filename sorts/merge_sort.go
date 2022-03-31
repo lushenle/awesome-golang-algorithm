@@ -1,25 +1,30 @@
 package sorts
 
-func MergeSort(nums []int) []int {
-	if len(nums) <= 1 {
-		return nums
+import (
+	"github.com/lushenle/awesome-golang-algorithm/constraints"
+	"github.com/lushenle/awesome-golang-algorithm/math/min"
+)
+
+func MergeSort[T constraints.Ordered](arr []T) []T {
+	if len(arr) <= 1 {
+		return arr
 	}
 
 	// defines the current array in 2 parts
-	var mid = len(nums) / 2
+	var mid = len(arr) / 2
 
 	// sort the 1st part of array
-	var a = MergeSort(nums[:mid])
+	var a = MergeSort(arr[:mid])
 
 	// sort the 2nd part of array
-	var b = MergeSort(nums[mid:])
+	var b = MergeSort(arr[mid:])
 
 	// merge the both parts by comparing elements of both the parts
 	return merge(a, b)
 }
 
-func merge(a, b []int) []int {
-	r, i, j := make([]int, len(a)+len(b)), 0, 0
+func merge[T constraints.Ordered](a, b []T) []T {
+	r, i, j := make([]T, len(a)+len(b)), 0, 0
 	for i < len(a) && j < len(b) {
 		if a[i] <= b[j] {
 			r[i+j] = a[i]
@@ -41,4 +46,15 @@ func merge(a, b []int) []int {
 	}
 
 	return r
+}
+
+func MergeIter[T constraints.Ordered](items []T) []T {
+	for step := 1; step < len(items); step += step {
+		for i := 0; i+step < len(items); i += 2 * step {
+			temp := merge(items[i:i+step], items[i+step:min.Int(i+2*step, len(items))])
+			copy(items[i:], temp)
+		}
+	}
+
+	return items
 }

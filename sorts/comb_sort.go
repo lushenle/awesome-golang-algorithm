@@ -1,5 +1,7 @@
 package sorts
 
+import "github.com/lushenle/awesome-golang-algorithm/constraints"
+
 func getNextGap(gap int) int {
 	gap = gap * 10 / 13
 	if gap < 1 {
@@ -9,7 +11,7 @@ func getNextGap(gap int) int {
 	return gap
 }
 
-func CombSort(nums []int) []int {
+func CombSort[T constraints.Ordered](nums []T) []T {
 	swapped := true
 	length := len(nums)
 	gap := length

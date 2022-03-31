@@ -82,11 +82,15 @@ func TestSelectionSort(t *testing.T) {
 }
 
 func TestInsertionSort(t *testing.T) {
-	testFramework(t, InsertionSort)
+	testFramework(t, InsertionSort[int])
 }
 
 func TestMergeSort(t *testing.T) {
-	testFramework(t, MergeSort)
+	testFramework(t, MergeSort[int])
+}
+
+func TestMergeIter(t *testing.T) {
+	testFramework(t, MergeIter[int])
 }
 
 func TestQuickSort(t *testing.T) {
@@ -94,7 +98,7 @@ func TestQuickSort(t *testing.T) {
 }
 
 func TestCountSort(t *testing.T) {
-	testFramework(t, CountSort)
+	testFramework(t, CountSort[int])
 }
 
 func TestRadixSort(t *testing.T) {
@@ -106,7 +110,7 @@ func TestHeapSort(t *testing.T) {
 }
 
 func TestCombSort(t *testing.T) {
-	testFramework(t, CombSort)
+	testFramework(t, CombSort[int])
 }
 
 func TestShellSort(t *testing.T) {
@@ -168,11 +172,15 @@ func BenchmarkSelectionSort(b *testing.B) {
 }
 
 func BenchmarkInsertionSort(b *testing.B) {
-	benchmarkFramework(b, InsertionSort)
+	benchmarkFramework(b, InsertionSort[int])
 }
 
 func BenchmarkMergeSort(b *testing.B) {
-	benchmarkFramework(b, MergeSort)
+	benchmarkFramework(b, MergeSort[int])
+}
+
+func BenchmarkMergeIter(b *testing.B) {
+	benchmarkFramework(b, MergeIter[int])
 }
 
 func BenchmarkQuickSort(b *testing.B) {
@@ -180,7 +188,7 @@ func BenchmarkQuickSort(b *testing.B) {
 }
 
 func BenchmarkCountSort(b *testing.B) {
-	benchmarkFramework(b, CountSort)
+	benchmarkFramework(b, CountSort[int])
 }
 
 func BenchmarkRadixSort(b *testing.B) {
@@ -192,7 +200,7 @@ func BenchmarkHeapSort(b *testing.B) {
 }
 
 func BenchmarkCombSort(b *testing.B) {
-	benchmarkFramework(b, CombSort)
+	benchmarkFramework(b, CombSort[int])
 }
 
 func BenchmarkShellSort(b *testing.B) {

@@ -1,6 +1,8 @@
 package sorts
 
-func InsertionSort(nums []int) []int {
+import "github.com/lushenle/awesome-golang-algorithm/constraints"
+
+func InsertionSort[T constraints.Ordered](nums []T) []T {
 	for currentIndex := 1; currentIndex < len(nums); currentIndex++ {
 		// storing current element whose left side is checked for
 		// its correct position

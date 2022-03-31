@@ -1,5 +1,7 @@
 package sorts
 
+import "github.com/lushenle/awesome-golang-algorithm/constraints"
+
 //func CountSort(nums []int) []int {
 //	length := len(nums)
 //	output := make([]int, length)
@@ -34,7 +36,7 @@ package sorts
 //	return output
 //}
 
-func CountSort(nums []int) []int {
+func CountSort[T constraints.Number](nums []int) []int {
 	if len(nums) < 2 {
 		return nums
 	}
