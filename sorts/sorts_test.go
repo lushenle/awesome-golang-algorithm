@@ -74,7 +74,7 @@ func testFramework(t *testing.T, sortingFunction func([]int) []int) {
 }
 
 func TestBubbleSort(t *testing.T) {
-	testFramework(t, BubbleSort)
+	testFramework(t, BubbleSort[int])
 }
 
 func TestSelectionSort(t *testing.T) {
@@ -117,6 +117,10 @@ func TestSimpleSort(t *testing.T) {
 	testFramework(t, SimpleSort[int])
 }
 
+func TestImprovedSimple(t *testing.T) {
+	testFramework(t, ImprovedSimple[int])
+}
+
 // Bench tests
 func benchmarkFramework(b *testing.B, f func(arr []int) []int) {
 	var sortTests = []struct {
@@ -156,7 +160,7 @@ func benchmarkFramework(b *testing.B, f func(arr []int) []int) {
 }
 
 func BenchmarkBubbleSort(b *testing.B) {
-	benchmarkFramework(b, BubbleSort)
+	benchmarkFramework(b, BubbleSort[int])
 }
 
 func BenchmarkSelectionSort(b *testing.B) {
@@ -197,4 +201,8 @@ func BenchmarkShellSort(b *testing.B) {
 
 func BenchmarkSimpleSort(b *testing.B) {
 	benchmarkFramework(b, SimpleSort[int])
+}
+
+func BenchmarkImprovedSimple(b *testing.B) {
+	benchmarkFramework(b, ImprovedSimple[int])
 }
