@@ -113,6 +113,10 @@ func TestShellSort(t *testing.T) {
 	testFramework(t, ShellSort)
 }
 
+func TestSimpleSort(t *testing.T) {
+	testFramework(t, SimpleSort[int])
+}
+
 // Bench tests
 func benchmarkFramework(b *testing.B, f func(arr []int) []int) {
 	var sortTests = []struct {
@@ -189,4 +193,8 @@ func BenchmarkCombSort(b *testing.B) {
 
 func BenchmarkShellSort(b *testing.B) {
 	benchmarkFramework(b, ShellSort)
+}
+
+func BenchmarkSimpleSort(b *testing.B) {
+	benchmarkFramework(b, SimpleSort[int])
 }
