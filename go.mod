@@ -1,3 +1,3 @@
 module github.com/lushenle/awesome-golang-algorithm
 
-go 1.17
+go 1.18
