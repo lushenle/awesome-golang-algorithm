@@ -1,5 +1,7 @@
 package sorts
 
+import "github.com/lushenle/awesome-golang-algorithm/constraints"
+
 //func QuickSort(nums []int) []int {
 //	if len(nums) < 2 {
 //		return nums
@@ -43,7 +45,7 @@ package sorts
 //		append([]int{pivot}, QuickSort(right)...)...)
 //}
 
-func partition(nums []int, low, high int) int {
+func partition[T constraints.Ordered](nums []T, low, high int) int {
 	index := low - 1
 	// make the end element as pivot element
 	pivotElement := nums[high]
@@ -62,7 +64,7 @@ func partition(nums []int, low, high int) int {
 }
 
 // quickSortRange Sorts the specified range within the array
-func quickSortRange(nums []int, low, high int) {
+func quickSortRange[T constraints.Ordered](nums []T, low, high int) {
 	if len(nums) < 2 {
 		return
 	}
@@ -81,7 +83,7 @@ func quickSortRange(nums []int, low, high int) {
 	}
 }
 
-func QuickSort(nums []int) []int {
+func QuickSort[T constraints.Ordered](nums []T) []T {
 	quickSortRange(nums, 0, len(nums)-1)
 	return nums
 }

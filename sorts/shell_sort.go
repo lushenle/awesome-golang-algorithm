@@ -1,6 +1,8 @@
 package sorts
 
-func step(nums []int, start, gap int) {
+import "github.com/lushenle/awesome-golang-algorithm/constraints"
+
+func step[T constraints.Ordered](nums []T, start, gap int) {
 	length := len(nums)
 	for i := start + gap; i < length; i += gap {
 		backup := nums[i]
@@ -13,7 +15,7 @@ func step(nums []int, start, gap int) {
 	}
 }
 
-func ShellSort(nums []int) []int {
+func ShellSort[T constraints.Ordered](nums []T) []T {
 	length := len(nums)
 	if length <= 1 {
 		return nums

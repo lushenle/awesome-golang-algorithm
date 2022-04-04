@@ -1,6 +1,8 @@
 package sorts
 
-func SelectionSort(nums []int) []int {
+import "github.com/lushenle/awesome-golang-algorithm/constraints"
+
+func SelectionSort[T constraints.Ordered](nums []T) []T {
 	// reduces the effective size of the array by one in  each iteration
 	for i := 0; i < len(nums); i++ {
 		// temporary variable to store the position of minimum element

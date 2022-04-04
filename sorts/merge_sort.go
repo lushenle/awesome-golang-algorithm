@@ -49,9 +49,9 @@ func merge[T constraints.Ordered](a, b []T) []T {
 }
 
 func MergeIter[T constraints.Ordered](items []T) []T {
-	for step := 1; step < len(items); step += step {
-		for i := 0; i+step < len(items); i += 2 * step {
-			temp := merge(items[i:i+step], items[i+step:min.Int(i+2*step, len(items))])
+	for steps := 1; steps < len(items); steps += steps {
+		for i := 0; i+steps < len(items); i += 2 * steps {
+			temp := merge(items[i:i+steps], items[i+steps:min.Int(i+2*steps, len(items))])
 			copy(items[i:], temp)
 		}
 	}
